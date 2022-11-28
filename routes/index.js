@@ -32,14 +32,6 @@ app.post('/viewBlogs', (request, response) => {
     response.send();
 });
 
-app.post('/createBlogs', (request, response) => {
-  createBlogs(request, response);
-});
-
-app.post('/editBlogs', (request, response) => {
-  editBlogs(request, response);
-});
-
 app.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err);
