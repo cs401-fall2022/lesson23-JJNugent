@@ -1,0 +1,56 @@
+span{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+}
+.toggleable{
+    display: inline-block;
+    width: 15%;
+    height: 100vh;
+    background-color: #d6d6d6;
+}
+.container{
+    width: 80%;
+    margin: auto;
+}
+#leftMenu{
+    float: left;
+    text-align: center;
+}
+#rightMenu{
+    float: right;
+    text-align: center;
+}
+.banner{
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+#content{
+    display: inline-block;
+    text-align: center;
+    width: 70%;
+}
+.title{
+    font-weight: bold;
+    color: rgb(97, 86, 255);
+}
+.menuButton{
+    width: 80%;
+    height: 20px;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border: solid rgb(97, 86, 255) 1px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.menuSymbol{
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 12px;
+    height: 12px;
+}

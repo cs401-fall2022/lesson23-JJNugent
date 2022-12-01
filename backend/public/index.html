@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EZBlog</title>
+    <link rel="stylesheet" href="./style/style.css">
+  </head>
+  <body>
+    <div id="leftMenu" class="toggleable">
+      <div class="container">
+        <div class="banner">
+          <h2 class="title">EZBlog!</h2>
+          <img class="menuSymbol" src="assets/menu.png" alt="menuSymbol">
+        </div>
+      </div>
+      <a href="/create" class="menuButton banner" id="createButton" data-link>
+        <span class="title">Create Blog</span>
+        <img src="assets/plus.png" class="menuSymbol">
+      </a>
+      <a href="/edit" class="menuButton banner" id="editButton" data-link>
+        <span class="title">Edit Blog</span>
+        <img src="assets/pencil.png" class="menuSymbol">
+      </a>
+      <a href="/delete" class="menuButton banner" id="deleteButton" data-link>
+        <span class="title">Delete Blog</span>
+        <img src="assets/trash-can.png" class="menuSymbol">
+      </a>
+      <a href="/" class="menuButton banner" id="viewButton" data-link>
+        <span class="title">View Blog</span>
+        <img src="assets/eyeglasses.png" class="menuSymbol">
+      </a>
+      <div id="logIn">
+        <!-- Need to find js to show content depending on if user is logged in -->
+      </div>
+    </div>
+
+    <div id="content">
+        <!-- This content will also need to vary with some JS and states -->
+        <h1 class="title">My Feed</h1>
+    </div>
+
+    <div id="rightMenu" class="toggleable">
+      <div id="blogs">
+        <h2 class="title">Blogs</h2>
+        <!-- Gonna need some js to populate this with all of the available blogs -->
+      </div>
+    </div>
+  <script type="module" src="/static/js/index.js"></script>
+  </body>
+</html>
