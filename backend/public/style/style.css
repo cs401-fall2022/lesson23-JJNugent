@@ -54,3 +54,31 @@ span{
     width: 12px;
     height: 12px;
 }
+#blogContent{
+    height: 50vh;
+}
+.blogDiv{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8%;
+    padding: 3px;
+    border: solid rgb(97, 86, 255) 1px;
+    border-radius: 5px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(97, 86, 255);
+    cursor: pointer;
+}
+#mainBlog{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+    border: solid rgba(0, 0, 0, 0.5) 1px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+}
+#blogTitle{
+    font-size: 25px;
+}

@@ -2,26 +2,21 @@ const blogModel = require('../schema/Blog');
 
 module.exports.getBlog = async (req, res) => {
     const blog = await blogModel.find();
-    res.send(blog);
+    console.log(blog);
+    res.json(blog);
 };
 
 module.exports.saveBlog = async (req, res) => {
-
-    const { userName } = req.body;
-
-    blogModel.create({ userName }).then((data) => {
-        console.log("Blog added");
-        console.log(data);
+    blogModel.create({blogTitle: req.body.blogTitle, blogContent: req.body.blogContent})
+    .then((data) => {
         res.send(data);
+        console.log(data);
     });
-
-    const blog = await blogModel.find();
-    res.send(blog);
 };
 
 module.exports.editBlog = async (req, res) => {
-    const { _id, username } = req.body;
-    blogModel.findByIdAndUpdate(_id, {userName})
+    blogModel.findByIdAndUpdate(req.body._id, 
+    {blogTitle: req.body.blogTitle, blogContent: req.body.blogContent})
     .then(()=> res.send("Edit saved"))
     .catch((err) => console.log(err));
 }

@@ -8,7 +8,14 @@ export default class extends View {
 
     async getHtml() {
         return `
-            <h1>This has worked</h1>
+            <h1 class='title'>View Blogs!</h1>
+
+            <p>Select a blog from the right</p>
+
+            <div id='mainBlog'>
+                <span class='title' id='blogTitle'></span>
+                <p id='blogContent'></p>
+            </div>
         `;
     }
 }
