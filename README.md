@@ -2,4 +2,5 @@
 
 To run - cd to EZBlog directory
 
-type npm start
+run npm install
+run npm start
