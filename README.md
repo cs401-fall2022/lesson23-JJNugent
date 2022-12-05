@@ -1,5 +1,5 @@
 # EZBlog
 
-To run - CD to EZBlog directory
+To run - cd to EZBlog directory
 
 type npm start
