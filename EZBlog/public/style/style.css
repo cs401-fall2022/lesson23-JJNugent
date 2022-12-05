@@ -16,6 +16,8 @@ span{
 #leftMenu{
     float: left;
     text-align: center;
+    transition-property: background-color;
+    transition-duration: 1.5s;
 }
 #rightMenu{
     float: right;
@@ -53,6 +55,7 @@ span{
     margin-bottom: auto;
     width: 12px;
     height: 12px;
+    cursor: pointer;
 }
 #blogContent{
     height: 50vh;
@@ -81,4 +84,11 @@ span{
 }
 #blogTitle{
     font-size: 25px;
+}
+#hide{
+    visibility: hidden;
+}
+.submitButton{
+    padding: 10px;
+    color:rgb(97, 86, 255);
 }

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//Define constant schema for blogs
 const blogSchema = new mongoose.Schema({
     blogTitle: {
         type: String,

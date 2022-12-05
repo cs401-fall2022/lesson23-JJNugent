@@ -14,7 +14,7 @@ export default class extends View {
 
             <div id='mainBlog'>
                 <span class='title' id='blogTitle'></span>
-                <p id='blogContent'></p>
+                <p style='white-space: pre-line' id='blogContent'></p>
             </div>
         `;
     }

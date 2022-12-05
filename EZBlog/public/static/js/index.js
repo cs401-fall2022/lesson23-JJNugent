@@ -1,35 +1,42 @@
 import ViewBlogs from './views/ViewBlogs';
 import CreateBlog from './views/CreateBlog';
+import DeleteBlog from './views/DeleteBlog';
+import EditBlog from './views/EditBlog';
 
+//Maintain state for application - track blogs, and a selected blog, if any
 const state = {
     blogs: [],
-    selected: {},
+    selected: {}
 };
 
+//Push state to allow forward and backward navigation without page changing
 const navigate = url => {
     history.pushState(null, null, url);
     router();
+    state.selected = {};
 }
 
+//Router function matches location.pathname against routes object and serves view
 const router = async () => {
     loadBlogs();
     const routes = [
         { path: '/', view: ViewBlogs },
         { path: '/create', view: CreateBlog },
-        { path: '/edit', view: CreateBlog },
-        { path: '/delete', view: () => console.log("View Blogs") },
+        { path: '/edit', view: EditBlog },
+        { path: '/delete', view: DeleteBlog },
     ];
 
-    //Test route for match
-    const possibleMatches = routes.map(route => {
+    //Create a map for each route where isMatch corresponds to location.pathName
+    const potentialRoutes = routes.map(route => {
         return {
             route: route,
             isMatch: location.pathname === route.path
         };
     });
 
-    let match = possibleMatches.find(possibleMatch => possibleMatch.isMatch);
+    let match = potentialRoutes.find(possibleMatch => possibleMatch.isMatch);
 
+    //Default to view page
     if (!match) {
         match = {
             route: routes[0],
@@ -39,9 +46,11 @@ const router = async () => {
 
     const view = new match.route.view();
 
+    //Serve view
     document.querySelector('#content').innerHTML = await view.getHtml();
 };
 
+//Get value from form, make post request to backend, if successful update app
 async function postBlog(e) {
     let blogTitle = document.querySelector('#blogTitle').value;
     let blogContent = document.querySelector('#blogContent').value;
@@ -64,6 +73,7 @@ async function postBlog(e) {
     loadBlogs();
 }
 
+//Get value from form, make post request to backend, if successful update app
 async function updateBlog(e) {
     let blogTitle = document.querySelector('#blogTitle').value;
     let blogContent = document.querySelector('#blogContent').value;
@@ -87,6 +97,32 @@ async function updateBlog(e) {
     loadBlogs();
 }
 
+//Confirm selected blog for deletion, and make post request to backend -- update app if successful
+async function deleteBlog(e) {
+    if (confirm(`Are you sure you want to delete blog titled ${state.selected.blogTitle}?`) == true){
+        await fetch('/delete', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({_id: state.selected._id})
+        })
+        .then(response => {
+            if (response.status == 200){
+                document.querySelector('#blogTitle').value = 'Title Here';
+                document.querySelector('#blogContent').value = 'Select a blog to delete';
+                let text = document.querySelector('#text');
+                text.innerHTML = 'Successfully deleted blog.';
+                document.getElementById('hide').style.visibility = 'hidden';
+            }
+        });
+    
+        loadBlogs();
+    }
+}
+
+//Load all blogs and then call display
 function loadBlogs() {
     fetch('/get', {
         method: 'GET',
@@ -99,6 +135,7 @@ function loadBlogs() {
     .then(data => displayBlogs(data));
 }
 
+//Save all current blogs to state and display all blogs in the right menu
 function displayBlogs(data) {
     state.blogs = data;
 
@@ -124,25 +161,38 @@ function displayBlogs(data) {
     blogList.appendChild(container);
 }
 
+//If a blog is clicked, set state and update app
 function blogClicked(e){
     state.selected = state.blogs[e.target.getAttribute('key')];
     displayBlogs(state.blogs);
     updateView();
 }
 
+//Update each view with appropriate blog data
 function updateView(){
+    let blogTitle = document.querySelector('#blogTitle');
+    let blogContent = document.querySelector('#blogContent');
     if(location.pathname=='/'){
-        document.querySelector('#blogTitle').innerHTML = state.selected.blogTitle;
-        document.querySelector('#blogContent').innerHTML = state.selected.blogContent;
+        blogTitle.innerHTML = state.selected.blogTitle;
+        blogContent.innerHTML = state.selected.blogContent;
     }
     else if (location.pathname=='/edit'){
-        document.querySelector('#blogTitle').value = state.selected.blogTitle;
-        document.querySelector('#blogContent').value = state.selected.blogContent;
+        blogTitle.value = state.selected.blogTitle;
+        blogTitle.removeAttribute('readonly');
+        blogContent.value = state.selected.blogContent;
+        blogContent.removeAttribute('readonly');
+    }
+    else if (location.pathname=='/delete'){
+        document.getElementById('hide').style.visibility = 'visible';
+        blogTitle.value = state.selected.blogTitle;
+        blogContent.value = state.selected.blogContent;
     }
 }
 
+//Allow backwards navigation
 window.addEventListener("popstate", router);
 
+//Allow button navigation without changing the page through event listeners
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link]")){
@@ -153,6 +203,9 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             if (location.pathname=='/edit'){
                 updateBlog(e);
+            }
+            else if (location.pathname=='/delete'){
+                deleteBlog(e);
             }
             else{
                 postBlog(e);

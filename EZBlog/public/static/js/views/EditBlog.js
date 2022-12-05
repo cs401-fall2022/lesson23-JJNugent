@@ -13,13 +13,13 @@ export default class extends View {
             <form id='blogSubmission' action='#'>
                 <label class='blogLabel' for='blogName'>Blog Title</label>
                 <br>
-                <input type='text' name='blogTitle' id='blogTitle' value='Title here'></input>
+                <input readonly type='text' name='blogTitle' id='blogTitle' value='Title here'>
                 <br>
                 <label class='blogLabel' for='blogContent'>Blog content</label>
                 <br>
-                <textarea id='blogContent' name='blogContent' rows='250' cols='125'>Content...</textarea>
+                <textarea readonly id='blogContent' name='blogContent' rows='250' cols='125'>Select a blog to edit</textarea>
                 <br>
-                <input type='submit' post-link></input>
+                <input class='submitButton' type='submit' value='Save Blog' post-link>
             </form>
 
             <p id="text"></p>

@@ -3,6 +3,7 @@ const {getBlog, saveBlog, editBlog, deleteBlog} = require('../controllers/contro
 
 const router = Router();
 
+//Handle the route - call the function defined in controller.js
 router.get('/get', getBlog);
 router.post('/save', saveBlog);
 router.post('/update', editBlog);
